@@ -3,6 +3,7 @@ package com.lahutina;
 import com.lahutina.products.Product;
 import com.lahutina.products.ProductFactory;
 import com.lahutina.products.RealProduct;
+import com.lahutina.products.VirtualProductCodeManager;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -47,8 +48,17 @@ public class Main {
         // boolean isCodeUsed = virtualProductCodeManager.isCodeUsed("xxx") --> true;
         // boolean isCodeUsed = virtualProductCodeManager.isCodeUsed("yyy") --> false;
         System.out.println("1. Create singleton class VirtualProductCodeManager \n");
-        var isUsed = false;
-        System.out.println("Is code used: " + isUsed + "\n");
+        VirtualProductCodeManager singletonClass = VirtualProductCodeManager.getInstance();
+
+        String usedCode = "xxx"; // code that will be used
+        String notUsedCode = "yyy"; // code that will be not used
+        singletonClass.useCode(usedCode);  // use code
+        System.out.println("Code " + usedCode + " was used \n");
+
+        boolean isCodeUsed = singletonClass.isCodeUsed(usedCode); // check if first code used
+        System.out.println("Is code " + usedCode + " used: " + isCodeUsed + "\n");
+        isCodeUsed = singletonClass.isCodeUsed(notUsedCode); // check if second code used
+        System.out.println("Is code " + notUsedCode + " used: " + isCodeUsed + "\n");
 
         //TODO 2). Create a functionality to get the most expensive ordered product
         Product mostExpensive = getMostExpensiveProduct(orders);
